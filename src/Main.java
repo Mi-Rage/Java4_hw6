@@ -42,6 +42,7 @@ class Tree {
     }
 
     TreeNode root;
+    static int count = 0;  // Добавлено для метода определния глубины ноды
 
     public void insert(int data) {
         TreeNode node = new TreeNode(data);
@@ -96,5 +97,28 @@ class Tree {
 
     public void displayTree() {
         preOrderTraverse(root);
+    }
+
+
+    // Возможно пригодится для определения сбалансированности дерева
+    public int findDepth(int data) {
+        count = 0;
+        return findDepth(root, data);
+    }
+
+    private int findDepth(TreeNode node, int data) {
+        if (node == null) {
+            return -1;
+        }
+
+        if (data == node.data) {
+            return count;
+        } else if (data < node.data) {
+            count++;
+            return findDepth(node.left, data);
+        } else {
+            count++;
+            return findDepth(node.right, data);
+        }
     }
 }
